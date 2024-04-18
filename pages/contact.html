@@ -97,7 +97,9 @@
         </div>
         <div class="logo-center">
             <!-- Logo image, replace 'logo-path.png' with your logo's path -->
-            <img src="../img/logo.jpg" alt="Company Logo" style="height: 100px;">
+            <a href="../index.html">
+                <img src="../img/logo-grey.png" alt="Company Logo" style="height: 100px;">
+            </a>
         </div>
         <div class="social-icons">
             <!-- Social media icons -->
@@ -125,22 +127,22 @@
         <div class="contact-form">
 
             <h2 class="subheader-nos">CONTATTACI</h2>
-            <p class="subheader-nos">Scrivi direttamente ad  <a href="mailto:fakemail">andreaqualcosa@gmail.com</a> o completa la form sotto ed entreremo in contatto.</p>
+            <p class="subheader-nos" style="padding: 20px;">Scrivi direttamente ad  <a href="mailto:fakemail">andreaqualcosa@gmail.com</a> o completa la form sotto ed entreremo in contatto.</p>
     
             <form action="submitForm.php" method="POST"> <!-- Adjust action as needed -->
-                <label for="name">Name:</label>
+                <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" required>
     
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
     
-                <label for="subject">Subject:</label>
+                <label for="subject">Oggetto:</label>
                 <input type="text" id="subject" name="subject" required>
     
-                <label for="message">Message:</label>
+                <label for="message">Messaggio:</label>
                 <textarea id="message" name="message" required></textarea>
     
-                <button type="submit">Send Message</button>
+                <button type="submit">Invia messaggio</button>
             </form>
         </div>
 
