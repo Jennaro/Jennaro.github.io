@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La bottega di Andrea</title>
+    <link rel="icon" href="img/logo-b-r.png" type="image/x-icon"/>
+
+
+    
+    <style>
+body, html {
+    max-width: 100vw;
+    overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+
+
+.side-panel {
+    position: fixed; /* Ensures the panel is positioned relative to the viewport */
+    top: 0;
+    left: 0; /* Set to 0 to align it properly from the left */
+    width: 250px; /* Or any width you prefer */
+    height: 100%; /* Makes the panel cover the full viewport height */
+    background-color: orange; /* Color for visibility */
+    transform: translateX(-100%); /* Start off-screen to the left */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for sliding in/out */
+    z-index: 1050; /* Higher than other elements, adjust if necessary */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3); /* Optional: Adds shadow for better layering effect */
+}
+
+.side-panel nav a {
+    display: block;
+    padding: 10px 0;
+    color: white;
+    text-decoration: none;
+}
+
+.side-panel-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+
+        header.w-full {
+    position: relative;  /* Change from absolute if it was set to absolute */
+    width: 100%;
+    z-index: 1000;  /* Ensure it's above other content but doesn't overlap */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* Optional: adds shadow for better visibility */
+}
+
+#hero-section {
+    position: relative;
+    width: 100vw; /* Ensures it covers full viewport width */
+    height: 120vh; /* Adjusts height to take full height minus header */
+    min-height: 120vh; /* Minimum height adjusted for the header */
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('img/table-hero.avif');
+    overflow: hidden;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    padding: 0; /* Adjust padding as needed */
+    margin-top: 120px; /* Set this to the height of your header */
+    animation: fadeInImage 1.5s ease-out 0.5s forwards; /* Animation name, duration, timing function, delay, and fill mode */
+    opacity: 0; /* Start with the image hidden */
+}
+
+
+.floating-text {
+    position: absolute; /* Default positioning within flex context */
+    bottom: 8em; /* Adjust based on desired distance from the bottom */
+    left: 20px; /* Adjust based on desired distance from the left */
+    color: white; /* For better visibility on darker backgrounds */
+    text-align: left;
+    align-self: flex-start; /* Aligns the content to the left */
+    text-align: left; /* Ensures text aligns to the left */
+    margin: 0; /* Removes any margin if present */
+    color: white; /* Ensures text is white, adjust as needed */
+    width: auto; /* Takes width based on content size */
+}
+
+
+.section {
+    position: relative; /* General styles if necessary */
+    padding: 20px 0;
+    width: 100vw;
+ 
+    /* No background properties here that could interfere */
+}
+
+
+@keyframes fadeInImage {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+        @font-face {
+    font-family: 'Barack';
+    src: url('font/barack.woff2') format('woff2'),
+         url('font/barack.woff') format('woff'),
+         url('font/barack.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+    @font-face {
+        font-family: "Futura";
+    src: url('font/FuturaPTLight.otf') format('opentype');
+    }
+    @font-face {
+        font-family: "Futura";
+        src: url('font/FuturaPTMedium.otf') format('opentype');
+        font-weight: bold;
+    }
+
+    @font-face {
+        font-family: "Audrey";
+    src: url('font/Audrey-Normal.otf') format('opentype');
+    }
+    
+.header-title {
+    font-family: 'Audrey', sans-serif; /* Fallback font */
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+    letter-spacing: .15em;
+    font-size: 75px;
+    margin-left: 2rem;
+    
+}
+.subheader {
+    font-family: 'Futura', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: .25em;
+    margin-left: 1.5rem;
+    margin-bottom: 1.2rem;
+    font-weight:200;
+}
+.subheader-nos{
+    font-family: 'Futura', sans-serif;
+   
+    
+    font-weight: bold;
+}
+/* Base styles for images to ensure consistency */
+.img-container img {
+    width: 100%; /* Make image fill the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the area without distorting the image */
+    opacity: 0; /* Start with images hidden */
+    transform: translateY(20px); /* Start slightly lower */
+    transition: opacity 0.5s ease-out, transform 0.7s ease-out; /* Smooth transition for opacity and position */
+
+}
+.img-container.visible img {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0px); /* Move to original position */
+}
+
+/* Grid layout for larger screens */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on larger screens */
+    gap: 10px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+
+    .main-container {
+        flex-direction: column; /* Ensures vertical stacking on smaller screens */
+    }
+    .section {
+        min-height: auto; /* Allows sections to fit content on smaller screens */
+        padding: 4em 0; /* Increase padding to avoid overlap */
+        flex-direction: column;
+    }
+    .grid {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+}
+
+/* Additional style for vertical alignment on smaller devices */
+@media (max-width: 480px) {
+    .img-container {
+        margin-bottom: 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.ml-2{
+    margin-left: 1rem;
+}
+.ml{
+    margin-left: .5rem;
+}
+
+.testimonials {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f0f0f0; /* Light background for visibility */
+    padding-bottom: 120px;
+}
+
+.arrow {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0; /* Arrows are invisible initially */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for the opacity change */
+}
+
+.testimonials:hover .arrow {
+    opacity: 1; /* Arrows become visible on section hover */
+}
+
+.left {
+    position: absolute;
+    left: 20px;
+}
+
+.right {
+    position: absolute;
+    right: 20px;
+}
+
+.testimonial-text {
+    text-align: center;
+    width: 100%;
+    padding: 0 50px; /* Padding to prevent text from overlapping arrows */
+    opacity: 1; /* Ensure text is visible by default */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for opacity change */
+}
+
+.testimonial-text p {
+    font-size: 16px;
+    color: #333; /* Dark text for readability */
+}
+
+
+.testimonial-header {
+    font-size: 32px; /* Adjust size as needed */
+    color: rgb(0, 0, 0); /* Dark text for readability */
+    margin-bottom: 20px; /* Space between the header and the testimonial content */
+}
+
+.contact-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: transparent;
+    border: 2px solid white;
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    margin-left: 2rem;
+    font-family: "Futura";
+}
+
+.contact-button:hover {
+    color: white;
+    background-color: brown;
+    border-color: brown;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px 0;
+}
+
+#b-product{
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    margin-left: 0;
+}
+/* Initial state of the image, hidden and slightly translated */
+.img-about {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.5s ease-out, transform 1.5s ease-out;
+}
+
+/* State when the image becomes visible */
+.img-about.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.site-footer {
+    width: 100%;
+    position: relative;
+    background-color: black;
+    color: white;
+    text-align: center; /* Center text and content */
+    padding: 40px 20px;
+    padding-top: 120px;
+    box-sizing: border-box;
+    display: flex; /* Use flexbox to align children */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center-align children */
+    justify-content: center; /* Center content vertically */
+}
+
+.footer-content {
+    width: 100%; /* Ensures the footer content takes full width */
+    display: flex; /* Enables flexbox properties */
+    flex-direction: column; /* Align children elements in a column */
+    align-items: center; /* Center-align the items */
+    justify-content: center; /* Center content vertically */
+}
+
+.footer-content img {
+    max-height: 150px; /* Adjust based on your needs */
+    width: auto; /* Maintain aspect ratio */
+}
+
+.site-footer a {
+    color: #ffffff; /* Ensures the link is also white */
+    text-decoration: none; /* Removes underline from the link */
+}
+
+.site-footer a:hover {
+    text-decoration: underline; /* Adds underline on hover */
+}
+
+.herotext{
+    margin-top: 10rem;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: fadeInImage 1.5s ease-out 0.5s forwards; /* Animation name, duration, timing function, delay, and fill mode */
+    opacity: 0; /* Start with the image hidden */
+}
+
+.menu-icon svg, .social-icons img {
+    cursor: pointer;
+    height: 24px;
+    padding: .1em /* Adjust size as needed */
+}
+
+.sections-container {
+    position: relative; /* This container holds both sections and the image */
+}
+.testimonials, .site-footer {
+    position: relative; /* Ensures proper layering and relative positioning */
+    z-index: 1; /* Lower than the image */
+}
+
+.boundary-image-container {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    position: absolute; /* Absolutely position the container */
+    width: 100%; /* Full width to center the image properly */
+    left: 0;
+    transform: translateY(-50%); /* Perfectly centers the image between sections */
+    z-index: 2; /* Higher than both the testimonial and footer */
+}
+
+.boundary-image-container img {
+    width: 240px; /* Adjust width as needed */
+    max-width: 100%; /* Ensures it does not overflow the viewport */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+
+    </style>
+    
+    
+    <link rel="stylesheet" href="./dist/styles.css">
+
+</head>
+
+<body class="font-sans main-container">
+    
+
+    <header class="top-header">
+        <div class="menu-icon">
+            <!-- Hamburger icon SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </div>
+        <div class="logo-center">
+            <!-- Logo image, replace 'logo-path.png' with your logo's path -->
+            <img src="img/logo.jpg" alt="Company Logo" style="height: 100px;">
+        </div>
+        <div class="social-icons">
+            <!-- Social media icons -->
+            <a href="https://facebook.com" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
+            <a href="https://instagram.com" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
+        </div>
+    </header>
+    <div class="side-panel">
+        <!-- Content for the sliding menu -->
+        <div class="side-panel-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </div>
+        <nav class="subheader-nos">
+            <a href="#about"> PRODOTTI</a>
+            <a href="#services"> CONTATTI</a>
+            <a href="#contact"></a>
+        </nav>
+    </div>
+    
+    
+
+      
+    
+    <header id="hero-section" class="section" ">
+        <div class="flex-col items-center justify-left h-full p-2 herotext">
+
+            <div class="text-left text-white floating-text">
+
+                <p class="subheader text-xl">BENVENUTI</p>
+                <h1 class="header-title">LA BOTTEGA DI <br> ANDREA</h1>
+                <button class="contact-button subheader-nos">CONTATTI</button> <!-- Button added here -->
+            </div>
+        </div>
+    </header>
+    
+
+
+<!-- Updated gallery section with wrapper for images -->
+<section id="gallery" class="section our-works-background" style="background-image: url('img/ultra-white-bg.avif');">
+    <h2 class="text-4xl font-bold subheader-nos text-center p-8 font-bold ">PRODOTTI</h2>
+    <div class="grid mt-10 p-4">
+        <!-- Each image is wrapped with div.img-container -->
+        <div class="img-container p-2">
+            <img src="/img/red.jpg" alt="Work Description 1">
+            <p class="text-description text-center subheader-nos mt-10">N GIOCATTOLO</p>
+        </div>
+        <div class="img-container p-2">
+            <img src="/img/red.jpg" alt="Work Description 2">
+            <p class="text-description text-center subheader-nos mt-10">NA MOTO</p>
+        </div>
+        <div class="img-container p-2">
+            <img src="/img/red.jpg" alt="Work Description 3">
+            <p class="text-description text-center subheader-nos mt-10">N MOBILE</p>
+        </div>
+    </div>
+    <div  class="button-container">
+        <button id="b-product" class="contact-button">TUTTI I PRODOTTI</button>
+    </div>
+</section>
+
+    
+
+<div class="sections-container">
+
+<section id="about" class="section  flex md:flex-row bg-white">
+    <div class="w-100 md:w-1/2 flex justify-center items-center">
+        <img src="img/red.jpg" alt="Descriptive Image" class="img-about max-w-full h-auto object-cover p-4 ">
+    </div>
+    <div class="w-full md:w-1/2 p-8">
+        <h2 class="ml text-2xl font-bold subheader-nos ">SU</h2>
+        <h2 class="text-3xl font-bold ml mb-4 subheader-nos" style="margin-bottom: 0
+        ;">ANDREA</h2>
+        <h4 class="text-3xl font-bold ml mb-4 subheader-nos" style="color:brown; padding-left: 5px; margin: top -5px;;">___</h2>
+        <p class="text-lg subheader-nos text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tortor ante, cursus et tincidunt quis, tincidunt quis nibh. Maecenas feugiat accumsan nibh vitae iaculis. Suspendisse eget mauris lacus. Pellentesque at ipsum tortor. Curabitur ut pretium dui, sed faucibus leo. Duis sit amet pellentesque metus. Aenean auctor porttitor ipsum, ac dignissim arcu sagittis ac. Suspendisse metus purus, dapibus id neque in, congue posuere leo. Pellentesque quis bibendum sem. Curabitur facilisis rhoncus orci ut ornare. Praesent quis iaculis lectus. Proin congue eget libero a cursus. Pellentesque nec faucibus neque, et ultrices nisi. Phasellus quis tortor elementum lectus viverra gravida. Fusce id lacus dui. Aliquam ultricies tortor felis, sit amet lacinia nisi feugiat id. Vivamus laoreet turpis sit amet ipsum bibendum, ut eleifend quam tristique.</p>
+    </div>
+</section>   
+
+
+<section id="testimonials" class="testimonials">
+    <h4 class="testimonial-header subheader-nos">RECENSIONI</h4>
+    <button id="prev" class="arrow left">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+    <div id="testimonial-text" class="text-4xl testimonial-text subheader-nos">
+        <p>"Primo recensiore, CUCINELLO. Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p>
+    </div>
+    <button id="next" class="arrow right">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+</section>
+
+<!-- Image Between Sections -->
+<div class="boundary-image-container">
+    <img src="img/logo-b-r.png" alt="Decorative Image">
+</div>
+
+<footer class="site-footer">
+    <div class="footer-content">
+<!--         <div class="logo-center">
+
+            <img src="img/logo-b.jpg" alt="Company Logo" style="height: 150px; ">
+        </div> -->
+        <h4 class="p-8 subheader-nos">INDIRIZZO, PERUGIA</h4>
+        <p class="subheader-nos"><a href="mailto:info@example.com">EMAIL</a></p>
+        <p class="subheader-nos">075 123456</p>
+
+        <p>QUI VANNO ICONE SOCIAL</p>
+    </div>
+</footer>
+
+</div>
+
+<!--
+    <section id="contact" class="p-8">
+        <h2 class="text-3xl font-bold text-center">Contattaci</h2>
+        <div class="flex justify-center">
+            <form class="w-full max-w-lg">
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
+                            Nome
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" type="text" placeholder="Mario Rossi">
+                    </div>
+                    <div class="w-full px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email">
+                            Email
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" type="email" placeholder="email@example.com">
+                    </div>
+                </div>
+                <div class="w-full px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="message">
+                        Messaggio
+                    </label>
+                    <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="message" placeholder="Messaggio"></textarea>
+                </div>
+                <div class="flex justify-center">
+                    <button class="shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+                        Invia
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer class="text-center p-4 text-gray-600">
+        © 2024 La bottega di Andrea. All rights reserved.
+    </footer>-->
+
+
+
+<script>   
+
+
+    //
+    // SCRIPT PER SIDE PANNEL
+    //
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the elements
+    const menuIcon = document.querySelector('.menu-icon');
+    const sidePanel = document.querySelector('.side-panel');
+    const closeIcon = document.querySelector('.side-panel-close');
+
+    // Event listener for opening the side panel
+    menuIcon.addEventListener('click', function() {
+        sidePanel.style.transform = 'translateX(0%)'; // Adjust this to ensure it slides in
+    });
+
+    // Event listener for closing the side panel
+    closeIcon.addEventListener('click', function() {
+        sidePanel.style.transform = 'translateX(-100%)'; // Adjust this to ensure it slides out
+    });
+
+        // Close the panel if clicking outside of it
+        document.addEventListener('click', function(event) {
+        if (!sidePanel.contains(event.target) && !menuIcon.contains(event.target)) {
+            sidePanel.style.transform = 'translateX(-100%)';
+        }
+    });
+});
+</script>
+<script>
+
+
+
+    //
+    //SCRIPT PER TESTIMONIAL
+    //
+
+    const testimonials = [
+        'Primo recensiore, CUCINELLO. Lorem ipsum dolor sit amet, consectetur adipiscing elit."',
+        'Secondo recensore, un pò più tecnico. Donec in tortor et eros bibendum mollis.',
+        'Terzo recensore, pieno di lodi. Pellentesque habitant morbi tristique senectus et netus.'
+    ];
+    let currentTestimonial = 0;
+
+    function updateTestimonial() {
+        const textContainer = document.getElementById('testimonial-text');
+        textContainer.style.opacity = 0;  // Hide the text initially
+
+        // Wait 300ms before updating the text and fading it back in
+        setTimeout(() => {
+            textContainer.innerHTML = `<p>"${testimonials[currentTestimonial]}"</p>`;
+            textContainer.style.opacity = 1;  // Fade the text back in
+        }, 300);  // Delay in milliseconds
+    }
+
+    document.getElementById('prev').addEventListener('click', function() {
+        if (currentTestimonial > 0) {
+            currentTestimonial--;
+        } else {
+            currentTestimonial = testimonials.length - 1;
+        }
+        updateTestimonial();
+    });
+
+    document.getElementById('next').addEventListener('click', function() {
+        if (currentTestimonial < testimonials.length - 1) {
+            currentTestimonial++;
+        } else {
+            currentTestimonial = 0;
+        }
+        updateTestimonial();
+    });
+
+    //
+    //SCRIPT PER FAR APPARIRE LE IMMAGINI QUANDO VISIBILI
+    //
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const observer = new IntersectionObserver((entries) => {
+        // Loop over the entries
+        entries.forEach(entry => {
+            // If the element is visible
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        rootMargin: '0px',
+        threshold: 0.5 // Trigger when 50% of the element is in view
+    });
+
+    // Target elements to observe
+    const images = document.querySelectorAll('.img-container');
+    images.forEach(img => {
+        observer.observe(img);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const observer = new IntersectionObserver((entries) => {
+        // Loop over the entries
+        entries.forEach(entry => {
+            // If the element is visible
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        rootMargin: '0px',
+        threshold: 0.5 // Trigger when 50% of the element is in view
+    });
+
+    // Target elements to observe
+    const images = document.querySelectorAll('.img-about');
+    images.forEach(img => {
+        observer.observe(img);
+    });
+});
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+    
+    
