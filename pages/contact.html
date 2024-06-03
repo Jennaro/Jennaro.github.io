@@ -12,7 +12,26 @@
 </head>
 
 <style>
+    .main-container{
+        animation: fadeInImage 1.5s ease-out 0.5s forwards; /* Animation name, duration, timing function, delay, and fill mode */
+    opacity: 0; /* Start with the image hidden */
+    }
     
+    .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 10px 20px;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.1);
+    animation: fadeInImage 0s ease-out 0s forwards; /* Animation name, duration, timing function, delay, and fill mode */
+    opacity: 0; /* Start with the image hidden */
+}
     
     .contact-container {
     display: flex;
