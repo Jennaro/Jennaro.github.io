@@ -56,7 +56,7 @@ body, html {
     justify-content: center; /* Center content horizontally */
     padding: 0; /* Adjust padding as needed */
     margin-top: 120px; /* Set this to the height of your header */
-    animation: fadeInImage 1.5s ease-out 0.5s forwards; /* Animation name, duration, timing function, delay, and fill mode */
+    animation: fadeInImage 0.5s ease-out 0.5s forwards; /* Animation name, duration, timing function, delay, and fill mode */
     opacity: 0; /* Start with the image hidden */
 }
 
@@ -195,6 +195,10 @@ body, html {
 }
 
 .main-container {
+    
+    animation: fadeInImage 0.5s ease-out 0.5s forwards; /* Animation name, duration, timing function, delay, and fill mode */
+    opacity: 0; /* Start with the image hidden */
+    
     display: flex;
     flex-direction: column;
 }

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatti - La Bottega di Andrea</title>
+    <link rel="icon" href="../img/logo-b-r.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="../dist/styles.css">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+
+
+    <style>
+            .main-container{
+        animation: fadeInImage 0.5s ease-out 0.5s forwards; /* Animation name, duration, timing function, delay, and fill mode */
+    opacity: 0; /* Start with the image hidden */
+    }
+
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Spazio tra le immagini */
+    justify-content: space-between;
+    margin-top: 120px;
+    margin-bottom: 185px; 
+    padding: 20px;/* Aggiungi un margine superiore per evitare la sovrapposizione */
+}
+
+.image-container {
+    position: relative;
+    width: calc(50% - 8px); /* 8px è metà del gap per lato */
+    box-sizing: border-box;
+    
+}
+
+.image-container img {
+    width: 100%;
+    transition: filter 0.3s ease; /* Aggiungi transizione per l'effetto hover */
+}
+
+.image-container:hover img {
+    filter: brightness(1.1); /* Rende l'immagine più chiara */
+}
+
+.overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente */
+    color: white;
+    padding: 5px 0;
+    opacity: 0; /* Inizialmente invisibile */
+    transition: opacity 0.2s ease 0.15s; /* Transizione con leggero ritardo */
+    pointer-events: none; /* Impedisce l'interazione con il testo */
+}
+
+.image-container:hover .overlay-text {
+    opacity: 1; /* Porta il testo in vista */
+}
+
+.lavori {
+    margin-top: 170px;
+}
+    
+    </style>
+
+
+</head>
+
+
+<body class="font-sans main-container">
+
+
+    <header class="top-header" style="background-color: #f0f0f0;">
+        <div class="menu-icon">
+            <!-- Hamburger icon SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </div>
+        <div class="logo-center">
+            <!-- Logo image, replace 'logo-path.png' with your logo's path -->
+            <a href="../index.html">
+                <img src="../img/logo-grey.png" alt="Company Logo" style="height: 100px;">
+            </a>
+        </div>
+        <div class="social-icons">
+            <!-- Social media icons -->
+            <a href="https://facebook.com" target="_blank"><img src="../img/facebook.png" alt="Facebook"></a>
+            <a href="https://instagram.com" target="_blank"><img src="../img/instagram.png" alt="Instagram"></a>
+        </div>
+    </header>
+
+
+    <div class="side-panel">
+        <!-- Content for the sliding menu -->
+        <div class="side-panel-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </div>
+        <nav class="subheader-nos">
+            <a href="../index.html"> HOME</a>
+            <a href="../pages/contact.html"> CONTATTI</a>
+            <a href="#contact"></a>
+        </nav>
+    </div>
+
+
+    <h2 class="text-4xl font-bold subheader-nos text-center p-8 font-bold lavori">LAVORI</h2>
+
+    <div class="image-gallery">
+        <div class="image-container">
+            <img src="../img/red.jpg" alt="Descrizione immagine 1">
+            <div class="text-description text-center subheader-nos mt-10 overlay-text">Testo immagine 1</div>
+        </div>
+        <div class="image-container">
+            <img src="../img/red.jpg" alt="Descrizione immagine 2">
+            <div class="text-description text-center subheader-nos mt-10 overlay-text">Testo immagine 2</div>
+        </div>
+        <div class="image-container">
+            <img src="../img/red.jpg" alt="Descrizione immagine 3">
+            <div class="text-description text-center subheader-nos mt-10 overlay-text">Testo immagine 3</div>
+        </div>
+        <!-- Aggiungi altre immagini qui -->
+    </div>
+
+    <div class="sections-container">
+
+        <div class="boundary-image-container">
+            <img src="../img/logo-b-r.png" alt="Decorative Image">
+        </div>
+    
+        <footer class="site-footer">
+            <div class="footer-content">
+        <!--         <div class="logo-center">
+        
+                    <img src="img/logo-b.jpg" alt="Company Logo" style="height: 150px; ">
+                </div> -->
+                <h4 class="p-8 subheader-nos">INDIRIZZO, PERUGIA</h4>
+                <p class="subheader-nos"><a href="mailto:info@example.com">EMAIL</a></p>
+                <p class="subheader-nos">075 123456</p>
+        
+                <p>QUI VANNO ICONE SOCIAL</p>
+            </div>
+        </footer>
+    
+    </div>
+
+
+    <script>   
+
+
+        //
+        // SCRIPT PER SIDE PANNEL
+        //
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the elements
+        const menuIcon = document.querySelector('.menu-icon');
+        const sidePanel = document.querySelector('.side-panel');
+        const closeIcon = document.querySelector('.side-panel-close');
+    
+        // Event listener for opening the side panel
+        menuIcon.addEventListener('click', function() {
+            sidePanel.style.transform = 'translateX(0%)'; // Adjust this to ensure it slides in
+        });
+    
+        // Event listener for closing the side panel
+        closeIcon.addEventListener('click', function() {
+            sidePanel.style.transform = 'translateX(-100%)'; // Adjust this to ensure it slides out
+        });
+    
+            // Close the panel if clicking outside of it
+            document.addEventListener('click', function(event) {
+            if (!sidePanel.contains(event.target) && !menuIcon.contains(event.target)) {
+                sidePanel.style.transform = 'translateX(-100%)';
+            }
+        });
+    });
+    </script>
+</body>
+
