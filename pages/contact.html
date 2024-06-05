@@ -8,7 +8,7 @@
     <link rel="icon" href="../img/logo-b-r.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../dist/styles.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
-
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 
 <style>
@@ -44,22 +44,23 @@
 
 
 .contact-form {
-    flex: 1; /* Allows the form to take up half of the container */
-    padding: 10px; /* Padding around the form for spacing */
+    flex: 3; /* Allows the form to take up half of the container */
+    padding: 20px; /* Padding around the form for spacing */
     margin-right: 20px; /* Adds some margin between form and map */
 }
 
 .contact-info {
     flex: 1; /* Allows the map and address to take up the other half */
-    padding: 10px; /* Padding around the info for spacing */
+    padding: 20px; /* Padding around the info for spacing */
     display: flex;
     flex-direction: column; /* Organizes address and map vertically */
-    align-items: flex-end; /* Aligns the content to the right */
+    align-items: flex-start; /* Aligns the content to the right */
 }
 .contact-info iframe {
     width: 100%; /* Ensures the map is responsive within the container */
     height: 450px; /* Fixed height for the map */
-    border: 0; /* Removes default border around iframe */
+    margin-top: 100px;
+ 
 }
 
 /* Styling for form elements */
@@ -72,18 +73,22 @@
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
+    border: 1px solid rgb(0,0,0,0.3); /* Adds a black border around input and textarea */
 }
 
 .contact-form button {
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
+    background-color: none;
+    color: brown;
+    border: brown 1px solid;
     cursor: pointer;
+    transition: background-color 0.1s ease-in-out, color 0.3s ease-in-out;
 }
 
 .contact-form button:hover {
-    background-color: #0056b3;
+   
+    background-color: brown;
+    color: white;
 }
 
 /* Responsive adjustments */
@@ -97,10 +102,12 @@
         margin-right: 0; /* Removes the margin between form and map */
         width: 100%; /* Ensures both elements take the full width */
     }
-
-    .contact-info {
-        order: -1; /* Puts the map and address above the form on small screens */
+    
+    .contact-form{
+        padding-bottom: 30px;
     }
+
+
 }
 </style>
 
@@ -142,14 +149,14 @@
 
 
 
-    <div class="contact-container" style="background-color: #f0f0f0; padding-bottom: 150px;">
+    <div class="contact-container" style="background-color: #f0f0f0; padding-bottom: 150px; padding-top: 150px;">
         <div class="contact-form">
 
-            <h2 class="subheader-nos">CONTATTACI</h2>
-            <p class="subheader-nos" style="padding: 20px;">Scrivi direttamente ad  <a href="mailto:fakemail">andreaqualcosa@gmail.com</a> o completa la form sotto ed entreremo in contatto.</p>
+            <h2 class="text-3xl font-bold ml mb-4 subheader-nos" style="font-size: 50px;">CONTATTACI</h2>
+            <p class="subheader-nos" style="margin-top: 50px; margin-bottom: 120px;color:  rgb(0,0,0,0.6);">Scrivi direttamente ad  <a href="mailto:fakemail">andreaqualcosa@gmail.com</a> o completa la form sotto ed entreremo in contatto.</p>
     
-            <form action="submitForm.php" method="POST"> <!-- Adjust action as needed -->
-                <label for="name">Nome:</label>
+            <form id="contact-form" class="subheader-nos" style="color:  rgb(0,0,0,0.6);" method="POST" > <!-- Adjust action as needed -->
+                <label for="name"  >Nome:</label>
                 <input type="text" id="name" name="name" required>
     
                 <label for="email">Email:</label>
@@ -161,14 +168,17 @@
                 <label for="message">Messaggio:</label>
                 <textarea id="message" name="message" required></textarea>
     
-                <button type="submit">Invia messaggio</button>
+                <button type="submit" style="margin-top: 20px; font-size: 26px;">Invia messaggio</button>
             </form>
         </div>
 
         <div class="contact-info">
-            <p class="subheader-nos">PERUGIA, INDIRIZZO</p>
+            <p class="subheader-nos">LA BOTTEGA, INDIRIZZO</p>
+            <p class="subheader-nos" style="margin-top: 10px; color: rgb(0,0,0,0.6);">Indirizzo</p>
+            <p class="subheader-nos" style="color: rgb(0,0,0,0.6)">Perugia CAP</p>
+            <p class="subheader-nos" style="color: rgb(0,0,0,0.6)">ITALIA</p>
             <!-- Google Maps Embed -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d7130.54900015416!2d12.495163383536886!3d43.11126944788703!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDPCsDA2JzQxLjgiTiAxMsKwMjknNTEuNiJF!5e0!3m2!1sit!2sit!4v1713444575333!5m2!1sit!2sit" width="500" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d7130.54900015416!2d12.495163383536886!3d43.11126944788703!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDPCsDA2JzQxLjgiTiAxMsKwMjknNTEuNiJF!5e0!3m2!1sit!2sit!4v1713444575333!5m2!1sit!2sit" width="500" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe>
 
         </div>
     </div>
@@ -227,6 +237,36 @@
             }
         });
     });
+
+    //SCRIPT EMAILJS
+
+
+    (function() {
+        emailjs.init("69Zuaag08HWrcCA-y"); // Inserisci il tuo user ID di EmailJS
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impedisce l'invio del form
+
+            // Ottieni i dati dal form
+            var templateParams = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            // Invia l'email
+            emailjs.send('service_83344h9', 'template_ew08v8j', templateParams) //SERVICE-ID, TEMPLATE ID
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert("Messaggio inviato con successo!");
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert("Invio del messaggio fallito.");
+                });
+        });
+    })();
+
     </script>
 
 
