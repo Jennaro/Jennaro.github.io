@@ -4,6 +4,17 @@ body, html {
 }
 
 
+.header-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.header-buttons button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
 .side-panel {
     position: fixed; /* Ensures the panel is positioned relative to the viewport */
@@ -18,11 +29,11 @@ body, html {
     box-shadow: 2px 0 5px rgba(0,0,0,0.3); /* Optional: Adds shadow for better layering effect */
 }
 
-.side-panel nav a {
+/* .side-panel nav a {
     display: block;
     padding: 10px 0;
     color: white;
-    text-decoration: none;
+    text-decoration: none;logo
 }
 
 .side-panel-close {
@@ -30,7 +41,7 @@ body, html {
     top: 10px;
     right: 10px;
     cursor: pointer;
-}
+} */
 
 
         header.w-full {
@@ -276,11 +287,21 @@ body, html {
     margin-left: 2rem;
     font-family: "Futura";
 }
+#b-product{
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    margin-left: 0;
+}
+#b-product:hover{
+    border: 2px solid #6f2b06;
+    color: white;
+    
+}
 
 .contact-button:hover {
     color: white;
-    background-color: brown;
-    border-color: brown;
+    background-color: #6f2b06;
+    border-color: #6f2b06;
 }
 
 .button-container {
@@ -289,11 +310,7 @@ body, html {
     padding: 20px 0;
 }
 
-#b-product{
-    border: 2px solid rgb(0, 0, 0);
-    color: rgb(0, 0, 0);
-    margin-left: 0;
-}
+
 /* Initial state of the image, hidden and slightly translated */
 .img-about {
     opacity: 0;
@@ -440,6 +457,51 @@ body, html {
     height: calc(50% - 10px); /* Altezza fissa delle immagini piccole */
 }
 
+.logo-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+    margin-right: 20px; /* Sposta leggermente i bottoni a destra */
+}
+
+.header-buttons button {
+    margin-left: 10px;
+    padding: 5px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* Spazio tra i bottoni e le icone social */
+}
+
+.social-icons img {
+    margin-left: 5px; /* Spazio tra le icone social */
+}
+
+.contatti-button {
+    background-color: #6f2b06;
+    color: white;
+    border: 2px solid #6f2b06;
+    
+    transition: background-color 0.3s ease, color 0.3s ease; /* Aggiunge un ritardo nell'hover */
+}
+
+.contatti-button:hover {
+    background-color: white;
+    color: #6f2b06;
+}
+
+
 @media (max-width: 768px) {
     .gallery-container {
         flex-direction: column;
@@ -456,3 +518,4 @@ body, html {
         width: 100%;
     }
 }
+
