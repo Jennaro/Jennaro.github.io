@@ -84,36 +84,38 @@
 
 
 <body class="font-sans main-container">
-
+    <div class="overlay"></div>
+    
 
     <header class="top-header">
-        <!--         <div class="menu-icon">
-                    
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </div> -->
-                <div class="logo-left">
-                    
-                    <a href="../index.html">
-                        <img src="../img/logo.jpg" alt="Company Logo" style="height: 100px;">
-                    </a>
-                </div>
-        
-        
-                <div class="header-buttons subheader-nos">
-                    <button onclick="window.location.href='./products.html'">Lavori</button>
-                    <button class="contatti-button" onclick="window.location.href='./contact.html'">Contatti</button>
-                </div>
-                
-                <div class="social-icons">
-                    <!-- Social media icons -->
-                    <a href="https://facebook.com" target="_blank"><img src="../img/facebook.png" alt="Facebook"></a>
-                    <a href="https://instagram.com" target="_blank"><img src="../img/instagram.png" alt="Instagram"></a>
-                </div>
-            </header>
+
+        <div class="logo-left">
+            
+            <a href="./index.html">
+                <img src="img/logo.jpg" alt="Company Logo" style="height: 100px;">
+            </a>
+        </div>
 
 
+        <div class="header-buttons subheader-nos">
+            <button onclick="window.location.href='pages/products.html'">Lavori</button>
+            <button class="contatti-button" onclick="window.location.href='pages/contact.html'">Contatti</button>
+        </div>
+        
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" class="social-link"><img src="img/facebook.png" alt="Facebook"></a>
+            <a href="https://instagram.com" target="_blank" class="social-link"><img src="img/instagram.png" alt="Instagram"></a>
+        </div>
+
+        <div class="menu-icon">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </div>
+        </div>
+    </header>
+    
     <div class="side-panel">
         <!-- Content for the sliding menu -->
         <div class="side-panel-close">
@@ -122,9 +124,13 @@
             </svg>
         </div>
         <nav class="subheader-nos">
-            <a href="../index.html"> HOME</a>
-            <a href="../pages/contact.html"> CONTATTI</a>
-            <a href="#contact"></a>
+            <a href="pages/contact.html"> CONTATTI</a>
+            <a href="pages/products.html"> LAVORI</a>
+            <div class="side-panel-social-icons">
+                <a href="https://facebook.com" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
+                <a href="https://instagram.com" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
+            </div>
+            
         </nav>
     </div>
 
@@ -177,29 +183,35 @@
         // SCRIPT PER SIDE PANNEL
         //
     
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get the elements
-        const menuIcon = document.querySelector('.menu-icon');
-        const sidePanel = document.querySelector('.side-panel');
-        const closeIcon = document.querySelector('.side-panel-close');
-    
-        // Event listener for opening the side panel
-        menuIcon.addEventListener('click', function() {
-            sidePanel.style.transform = 'translateX(0%)'; // Adjust this to ensure it slides in
-        });
-    
-        // Event listener for closing the side panel
-        closeIcon.addEventListener('click', function() {
-            sidePanel.style.transform = 'translateX(-100%)'; // Adjust this to ensure it slides out
-        });
-    
-            // Close the panel if clicking outside of it
-            document.addEventListener('click', function(event) {
-            if (!sidePanel.contains(event.target) && !menuIcon.contains(event.target)) {
-                sidePanel.style.transform = 'translateX(-100%)';
-            }
-        });
+        document.addEventListener("DOMContentLoaded", function() {
+    const menuIcon = document.querySelector('.menu-icon');
+    const sidePanel = document.querySelector('.side-panel');
+    const closeIcon = document.querySelector('.side-panel-close');
+    const overlay = document.querySelector('.overlay');
+
+    menuIcon.addEventListener('click', function() {
+        sidePanel.classList.add('active');
+        overlay.classList.add('active');
     });
+
+    closeIcon.addEventListener('click', function() {
+        sidePanel.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    overlay.addEventListener('click', function() {
+        sidePanel.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    // Chiude il side panel cliccando fuori dal pannello
+    document.addEventListener('click', function(event) {
+        if (!sidePanel.contains(event.target) && !menuIcon.contains(event.target)) {
+            sidePanel.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+    });
+});
     </script>
 </body>
 

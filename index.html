@@ -11,15 +11,11 @@
 </head>
 
 <body class="font-sans main-container">
+    <div class="overlay"></div>
     
 
     <header class="top-header">
-<!--         <div class="menu-icon">
-            
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-        </div> -->
+
         <div class="logo-left">
             
             <a href="./index.html">
@@ -34,11 +30,19 @@
         </div>
         
         <div class="social-icons">
-            <!-- Social media icons -->
-            <a href="https://facebook.com" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
-            <a href="https://instagram.com" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
+            <a href="https://facebook.com" target="_blank" class="social-link"><img src="img/facebook.png" alt="Facebook"></a>
+            <a href="https://instagram.com" target="_blank" class="social-link"><img src="img/instagram.png" alt="Instagram"></a>
+        </div>
+
+        <div class="menu-icon">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </div>
         </div>
     </header>
+    
     <div class="side-panel">
         <!-- Content for the sliding menu -->
         <div class="side-panel-close">
@@ -49,7 +53,11 @@
         <nav class="subheader-nos">
             <a href="pages/contact.html"> CONTATTI</a>
             <a href="pages/products.html"> LAVORI</a>
-            <a href="#contact"></a>
+            <div class="side-panel-social-icons">
+                <a href="https://facebook.com" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
+                <a href="https://instagram.com" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
+            </div>
+            
         </nav>
     </div>
     
@@ -168,32 +176,60 @@
 
 
 <script>   
+///SCRIPT HOVER SOCIAL ICON
+document.addEventListener("DOMContentLoaded", function() {
+    const socialLinks = document.querySelectorAll('.social-link img');
+
+    socialLinks.forEach(link => {
+        link.addEventListener('mouseover', () => {
+            socialLinks.forEach(otherLink => {
+                if (otherLink !== link) {
+                    otherLink.style.opacity = '0.2';
+                }
+            });
+        });
+
+        link.addEventListener('mouseout', () => {
+            socialLinks.forEach(otherLink => {
+                if (otherLink !== link) {
+                    otherLink.style.opacity = '1';
+                }
+            });
+        });
+    });
+});
 
 
     //
     // SCRIPT PER SIDE PANNEL
     //
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Get the elements
+    document.addEventListener("DOMContentLoaded", function() {
     const menuIcon = document.querySelector('.menu-icon');
     const sidePanel = document.querySelector('.side-panel');
     const closeIcon = document.querySelector('.side-panel-close');
+    const overlay = document.querySelector('.overlay');
 
-    // Event listener for opening the side panel
     menuIcon.addEventListener('click', function() {
-        sidePanel.style.transform = 'translateX(0%)'; // Adjust this to ensure it slides in
+        sidePanel.classList.add('active');
+        overlay.classList.add('active');
     });
 
-    // Event listener for closing the side panel
     closeIcon.addEventListener('click', function() {
-        sidePanel.style.transform = 'translateX(-100%)'; // Adjust this to ensure it slides out
+        sidePanel.classList.remove('active');
+        overlay.classList.remove('active');
     });
 
-        // Close the panel if clicking outside of it
-        document.addEventListener('click', function(event) {
+    overlay.addEventListener('click', function() {
+        sidePanel.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    // Chiude il side panel cliccando fuori dal pannello
+    document.addEventListener('click', function(event) {
         if (!sidePanel.contains(event.target) && !menuIcon.contains(event.target)) {
-            sidePanel.style.transform = 'translateX(-100%)';
+            sidePanel.classList.remove('active');
+            overlay.classList.remove('active');
         }
     });
 });

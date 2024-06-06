@@ -19,29 +19,58 @@ body, html {
 .side-panel {
     position: fixed; /* Ensures the panel is positioned relative to the viewport */
     top: 0;
-    left: 0; /* Set to 0 to align it properly from the left */
-    width: 250px; /* Or any width you prefer */
+    right: 0; /* Set to 0 to align it properly from the left */
+    width: 75%; /* Or any width you prefer */
     height: 100%; /* Makes the panel cover the full viewport height */
-    background-color: orange; /* Color for visibility */
-    transform: translateX(-100%); /* Start off-screen to the left */
+    background-color: #6f2b06; /* Color for visibility */
+    transform: translateX(100%); /* Start off-screen to the left */
     transition: transform 0.3s ease-in-out; /* Smooth transition for sliding in/out */
     z-index: 1050; /* Higher than other elements, adjust if necessary */
-    box-shadow: 2px 0 5px rgba(0,0,0,0.3); /* Optional: Adds shadow for better layering effect */
+    box-shadow: -2px 0 5px rgba(0,0,0,0.3); /* Optional: Adds shadow for better layering effect */
 }
 
-/* .side-panel nav a {
-    display: block;
-    padding: 10px 0;
-    color: white;
-    text-decoration: none;logo
+.side-panel-social-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px; /* Spazio sopra le icone social */
 }
 
+.side-panel-social-icons a {
+    margin-right: 10px; /* Spazio tra le icone social */
+}
+
+.side-panel-social-icons img {
+    width: 24px; /* Dimensione delle icone social */
+    height: 24px;
+}
+
+.side-panel nav {
+
+    display: flex;
+    flex-direction: column; /* Visualizza gli elementi in ordine verticale */
+    padding: 20px;
+}
+.side-panel nav a {
+    color: white; /* Colore bianco per i link */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-size: 1em; /* Dimensione del font aumentata */
+    margin-bottom: 35px; /* Maggiore distanza tra i link */
+}
+
+/* Posiziona la X fuori dal pannello a sinistra */
 .side-panel-close {
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: -40px; /* Posizione fuori dal pannello */
     cursor: pointer;
-} */
+    z-index: 1100;
+    display: none; 
+}
+.side-panel.active .side-panel-close {
+    display: block;
+}
 
 
         header.w-full {
@@ -486,6 +515,15 @@ body, html {
 
 .social-icons img {
     margin-left: 5px; /* Spazio tra le icone social */
+    transition: opacity 0.3s ease; /* Aggiunge una transizione di opacità */
+}
+
+/* Effetto hover per le icone social */
+.social-link:hover ~ .social-link img {
+    opacity: 0.5;
+}
+.social-link:hover img {
+    opacity: 1; /* Mantiene l'icona su cui si sta hoverando al 100% */
 }
 
 .contatti-button {
@@ -519,3 +557,47 @@ body, html {
     }
 }
 
+.menu-icon {
+    display: none; /* Nasconde il menu hamburger di default */
+
+}
+@media (max-width: 768px) {
+    .header-buttons, .social-icons {
+        display: none; /* Nasconde i bottoni e le icone social */
+    }
+
+    .logo-left {
+        justify-content: center; /* Centra il logo */
+        flex-grow: 1;
+    }
+
+    .menu-icon {
+        display: block; /* Mostra il menu hamburger */
+        position: absolute;
+        right: 20px;
+    }
+
+    .top-header {
+        justify-content: center; /* Centra il contenuto */
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1049;
+    display: none; /* Nascondi l'overlay di default */
+}
+
+/* Mostra il side-panel e l'overlay quando attivo */
+.side-panel.active {
+    transform: translateX(0); /* Porta il pannello visibile */
+}
+
+.overlay.active {
+    display: block; /* Mostra l'overlay */
+}
