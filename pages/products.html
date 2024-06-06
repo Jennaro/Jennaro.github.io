@@ -176,7 +176,30 @@
     </div>
 
 
-    <script>   
+    <script> 
+    
+    ///SCRIPT HOVER SOCIAL ICON
+document.addEventListener("DOMContentLoaded", function() {
+    const socialLinks = document.querySelectorAll('.social-link img');
+
+    socialLinks.forEach(link => {
+        link.addEventListener('mouseover', () => {
+            socialLinks.forEach(otherLink => {
+                if (otherLink !== link) {
+                    otherLink.style.opacity = '0.2';
+                }
+            });
+        });
+
+        link.addEventListener('mouseout', () => {
+            socialLinks.forEach(otherLink => {
+                if (otherLink !== link) {
+                    otherLink.style.opacity = '1';
+                }
+            });
+        });
+    });
+});
 
 
         //
